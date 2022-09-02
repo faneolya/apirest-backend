@@ -1,10 +1,9 @@
-//intégration base de donnée// 
+
 
 var express = require("express")
 var mysql = require("mysql")
 var app = express()
 
-//analyse les requêtes de type de contenu - application/json//
 
 app.use(express.json())
 
