@@ -1,14 +1,14 @@
-/*intégration base de donnée*/ 
+//intégration base de donnée// 
 
 var express = require("express")
 var mysql = require("mysql")
 var app = express()
 
-/* analyse les requêtes de type de contenu - application/json*/
+//analyse les requêtes de type de contenu - application/json//
 
 app.use(express.json())
 
-/*connection*/
+//connexion//
 
 const con = mysql.createConnection({
     host: 'localhost',
@@ -32,7 +32,7 @@ app.get('/', (req, res)=>{
     res.send('Hello');
 })
 
-/*récuperer une chaussure*/
+//lister les chaussures//
 
 app.get('/api/get', (req, res)=>{
     
@@ -43,7 +43,7 @@ app.get('/api/get', (req, res)=>{
     })
 })
 
-
+//lister les marques//
 app.get('/api/get/:id', (req, res)=>{
     
     con.query('SELECT * FROM chaussures WHERE idxChaussure=?',[req.params.idxChaussure],(err,result)=>{
@@ -53,7 +53,7 @@ app.get('/api/get/:id', (req, res)=>{
     })
 })
 
-/*envoyer requêtes chaussures*/
+//envoyer requêtes chaussures//
 
 app.post('/api/chaussures/post', (req, res)=>{
     const id_marque = req.body.id_marque;
@@ -61,7 +61,7 @@ app.post('/api/chaussures/post', (req, res)=>{
     const taille = req.body.taille;
     const prix = req.body.prix;
 
-/*ajouter une chaussure*/
+//ajouter une chaussure//
 
     con.query('INSERT INTO chaussures VALUES(NULL,?,?,?,?)',[id_marque,couleur,taille,prix],(err,result)=>{
         if(err)
@@ -73,13 +73,13 @@ app.post('/api/chaussures/post', (req, res)=>{
     })
 })
 
-/*envoyer requêtes marque*/
+//envoyer requêtes marque//
 
 app.post('/api/marques/post', (req, res)=>{
     const nom_de_la_marque = req.body.nom_de_la_marque;
     const logo = req.body.logo;
 
-/*ajouter une marque*/
+//ajouter une marque//
 
     con.query('INSERT INTO marques VALUES(NULL,?,?)',[nom_de_la_marque,logo],(err,result)=>{
         if(err)
@@ -91,7 +91,7 @@ app.post('/api/marques/post', (req, res)=>{
     })
 })
 
-/*définit le port, écoute les requêtes*/
+//définit le port, écoute les requêtes//
 
 app.listen(3003, (err)=>{
     if(err)
